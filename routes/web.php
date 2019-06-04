@@ -19,18 +19,18 @@
   // Route::resource('cityCN', 'cityCtr');
   // Route::apiResource('cityCN', 'cityCtr');
   Route::get('/', function() {
- 	return view('roomView');
+ 	return view('welcome');
  });
- Route::resource('roomCN', 'roomCtr');
- Route::apiResource('roomCN', 'roomCtr');
-// Route::get('dropdownlist','DataController@getCountries');
-// Route::get('dropdownlist/getstates/{id}','DataController@getStates'); Route::get('/', function() {
-//  	return view('addCountry');
-//  });
-//  Route::resource('countryCN', 'DataController');
-//  Route::apiResource('countryCN', 'DataController');
-//  Route::resource('infoCN', 'infoCtr');
-//  Route::apiResource('infoCN', 'infoCtr');
+ // Route::resource('roomCN', 'roomCtr');
+ // Route::apiResource('roomCN', 'roomCtr');
+Route::get('dropdownlist','DataController@getCountries');
+Route::get('dropdownlist/getstates/{id}','DataController@getStates'); Route::get('/', function() {
+ 	return view('addCountry');
+ });
+ Route::resource('countryCN', 'DataController');
+ Route::apiResource('countryCN', 'DataController');
+ Route::resource('infoCN', 'infoCtr');
+ Route::apiResource('infoCN', 'infoCtr');
 
 
 
