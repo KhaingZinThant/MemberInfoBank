@@ -21,7 +21,7 @@ class userLevelCtr extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                             
-                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->userLevelId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editUserLevel">Edit</a>';
+                           $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->userLevelId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editUserLevel">Edit</a>';
                            
                            $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->userLevelId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteUserLevel">Delete</a>';
     
