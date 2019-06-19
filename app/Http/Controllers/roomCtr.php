@@ -14,19 +14,8 @@ class roomCtr extends Controller
      */
     public function index()
     {
-                if ($request->ajax()) {
-            $data = Room::latest()->get();
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->roomId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        return Datatables::of(User::query())->make(true);
+        $roomVar=Room::all();        
        return view('indexRoom',compact('roomVar'));
     }
 
@@ -48,9 +37,14 @@ class roomCtr extends Controller
      */
     public function store(Request $request)
     {
-            Room::updateOrCreate(['roomDesc' => $request->roomDesc],
-            ['active' => $request->active, 'remark' => $request->remark]);        
-        return response()->json(['success'=>'Room saved successfully.']);
+         $request->validate(['roomDesc'=>'required',
+                            'active'=>'required',
+                            'remark'=>'required']);
+         $roomVar=new Room(['roomDesc'=>$request->get('roomDesc'),
+                        'active'=>$request->get('active'),
+                        'remark'=>$request->get('remark')]);
+         $roomVar->save();
+         return redirect('/roomCN')->with('success','Successful');
     }
 
     /**
@@ -73,7 +67,7 @@ class roomCtr extends Controller
     public function edit($id)
     {
         $roomVar=Room::find($id);
-        return response()->json($roomVar);
+        return view('roomEdit',compact('roomVar'));
     }
 
     /**
@@ -103,7 +97,8 @@ class roomCtr extends Controller
      */
     public function destroy($id)
     {
-         Room::find($id)->delete();
-         return response()->json(['success'=>'Room deleted successfully.']);
+         $roomVar = Room::find($id);
+        $roomVar->delete();
+        return redirect('/roomCN')->with('success','Successfully deleted');
     }
 }

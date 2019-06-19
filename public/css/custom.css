@@ -1,0 +1,105 @@
+
+body{
+    background-color: white;
+}
+
+/*Layout Start*/
+.app-sidebar .sidebar-header {
+    background-image: radial-gradient(#cc0000, #800000);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+}
+.cus-nav {
+    color: #E7C653;
+    background-image: radial-gradient(#cc0000, #800000);
+    text-shadow: 3px 3px 3px black;
+}
+
+/*Layout End*/
+
+/*homepage start*/
+
+#logoimg{
+    /*width: 75px;*/
+    /*height: 75px;*/
+    max-width:100%;
+    height:auto;
+}
+#header{
+    color: #E7C653;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background-image: radial-gradient(#cc0000, #800000);
+    box-shadow: 2px 2px 2px black;
+    clear: left;
+}
+#header h1 {
+    font-family: "Bodoni MT";
+    color: #E7C653;
+    text-shadow: 3px 3px 3px black;
+}
+@media screen and (max-width: 500px) {
+    #header h1 {
+        display: none;
+        text-align: left;
+    }
+}
+#content{
+    margin-top: 200px;
+    margin-bottom: 100px;
+    clear: left;
+
+}
+.cus-btn{
+    background-color: #b30000;
+}
+a#register {
+    color: #caa41c;
+}
+.cus-btn:hover{
+    background-color: #800000;
+}
+.cus-btn a:hover{
+    color: white;
+}
+#footer{
+    color: #cec8b1;
+    background-color: #424142;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding-top: 6px;
+}
+@media screen and (max-width: 500px) {
+    #footer p {
+        position: relative;
+    }
+}
+/*homepage end*/
+
+
+
+
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.flex-container .content-center{
+    width: 200px;
+    height: 200px;
+}
+.box-model{
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+

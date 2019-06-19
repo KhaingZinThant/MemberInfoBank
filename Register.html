@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/style/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fontawesome-5.8.2/fontawesome-free-5.8.2-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <style>
+        .cus-tab-content{
+            background: linear-gradient(to top left,#64aeb4 0%, #d1e9ed 100%);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding: 30px;
+        }
+        body{
+            background-color: #daedf1;
+        }
+        h1, button {
+            font-family:"Rockwell";
+            color: #3c565d;
+        }
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: grey;
+        }
+        .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+            border-color: #e9ecef #e9ecef #dee2e6;
+            background: #d1e9ed;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19),0 6px 20px 0 rgba(0, 0, 0, 0.19),0;
+        }
+        .nav-tabs .nav-link.active,
+        .nav-tabs .nav-item.show .nav-link {
+            font-weight: bold;
+            color: #3c565d;
+            background-color: #d1e9ed;
+            border-color: #dee2e6 #dee2e6 ;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #d1e9ed;
+        }
+        input[type=text] , .custom-select{
+            border-radius: 0px 15px 15px 0px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h1 class="text-center mt-5">Register Form</h1>
+    <br>
+    <!-- Nav tabs Start-->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#personal">Personal (require)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#parentsDetail">Parents Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#eduAndJob">Education & Job</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#health">Health</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#donation">Rooms</a>
+        </li>
+    </ul>
+    <!-- Nav tabs End-->
+
+    <!-- Tab panes content Start-->
+    <div class="tab-content cus-tab-content">
+
+        <!--personal tab content Start-->
+        <div id="personal" class="container tab-pane active"><br>
+            <div class="row">
+                <!--Left column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!-- Name-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user pr-1 pl-1"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Name">
+                        </div>
+                        <!--NRC-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card"></i></span>
+                            </div>
+                            <select class="custom-select col-sm-2">
+                                <option selected>1</option>
+                                <option value="volvo">2</option>
+                                <option value="fiat">3</option>
+                                <option value="audi">4</option>
+                            </select>
+                            <select class="custom-select col-sm-3">
+                                <option selected>MaTaLa</option>
+                                <option value="volvo">2</option>
+                                <option value="fiat">3</option>
+                                <option value="audi">4</option>
+                            </select>
+                            <input type="text" class="col-md-3 form-control" placeholder="NRC No.">
+                        </div>
+                        <!--Date of birth-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-birthday-cake"></i></span>
+                            </div>
+                            <input type="date" class="form-control col-md-8">
+                        </div>
+                        <!--Gender-->
+                        <div class="input-group mb-4">
+                            <!-- Male -->
+                            <div class="custom-control custom-radio custom-control-inline active">
+                                <input type="radio" class="custom-control-input" id="male" name="gender">
+                                <label class="custom-control-label" for="male">Male</label>
+                            </div>
+
+                            <!-- Female -->
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="female" name="gender">
+                                <label class="custom-control-label" for="female">Female</label>
+                            </div>
+                        </div>
+                        <!--Person type-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <select name="ptype" id="ptype" class="custom-select col-md-8 form-control" >
+                                <option value="1">persontype 1</option>
+                                <option value="2">persontype 2</option>
+                                <option value="3">persontype 3</option>
+                                <option value="4">persontype 4</option>
+
+                            </select>
+                           <!-- <input type="text" class="col-md-8 form-control" placeholder="Person Type">--!>
+                        </div>
+                        <!--Nationality-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-flag "></i></span>
+                            </div>
+                            <select name="nationality" id="nationality" class="custom-select col-md-8 form-control" >
+                                <option value="1">Nationality 1</option>
+                                <option value="2">Nationality 2</option>
+                                <option value="3">Nationality 3</option>
+                                <option value="4">Nationality 4</option>
+
+                            </select>
+                            <!--<input type="text" class="col-md-8 form-control" placeholder="Nationality">--!>
+                        </div>
+                        <!--Address-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                            </div>
+                            <textarea name="" id="" rows="3" class="col-md-8 form-control" placeholder="Address"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <!--Right column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Email-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Email">
+                        </div>
+                        <!--Phone Number-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-phone pr-1"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Phone Number">
+                        </div>
+                        <!--City-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-building"></i></span>
+                            </div>
+                            <select name="city" id="city" class="custom-select col-md-8 form-control">
+                                <option value="1">city 1</option>
+                                <option value="2">city 2</option>
+                                <option value="3">city 3</option>
+                                <option value="4">city 4</option>
+                                <option value="5">city 5</option>
+                            </select>
+                            <!--<input type="text" class="col-md-8 form-control" placeholder="City">--!>
+                        </div>
+                        <!--Religion-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-star"></i></span>
+                            </div>
+                            <select name="religion" id="religion" class="custom-select col-md-8 form-control">
+                                <option value="1">religion 1</option>
+                                <option value="2">religion 2</option>
+                                <option value="3">religion 3</option>
+                                <option value="4">religion 4</option>
+                                <option value="5">religion 5</option>
+                            </select>
+                           <!-- <input type="text" class="col-md-8 form-control" placeholder="Religion">--!>
+                        </div>
+                        <!--Person Status-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user-plus"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Person Status">
+                        </div>
+                        <!--Supervisor-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user pr-1"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Supervisor">
+                        </div>
+                        <!--Channel-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-share-square pr-1"></i></span>
+                                <select name="channel" id="channel" class="custom-select col-md-8">
+                                    <option value="1">channel 1</option>
+                                    <option value="2">channel 2</option>
+                                    <option value="3">channel 3</option>
+                                    <option value="4">channel 4</option>
+                                    <option value="5">channel 5</option>
+                                </select>
+                            </div>
+                            <!--<input type="text" class="col-md-8 form-control" placeholder="Channel">--!>
+							
+                        </div>
+                        <!--Batch-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar pr-1"></i></span>
+                            </div>
+                            <select name="batch" id="batch" class="custom-select col-md-8 ">
+                                <option value="1">Batch 1</option>
+                                <option value="2">Batch 2</option>
+                                <option value="3">Batch 3</option>
+                                <option value="4">Batch 4</option>
+                                <option value="5">Batch 5</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--personal tab content End-->
+
+        <!--parents tab content Start-->
+        <div id="parentsDetail" class="container tab-pane fade"><br>
+            <div class="row">
+                <!--Left Column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Father Name-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Father Name">
+                        </div>
+                        <!--Father Job-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-male"></i></span>
+                                <select name="fjob" id="fjob" class="custom-select col-md-10 form-control">
+                                    <option value="1">Fatherjob 1</option>
+                                    <option value="2">Fatherjob 2</option>
+                                    <option value="3">Fatherjob 3</option>
+                                    <option value="4">Fatherjob 4</option>
+                                    <option value="5">Fatherjob 5</option>
+                                </select>
+                            </div>
+                           <!-- <input type="text" class="col-md-8 form-control" placeholder="Father Job">--!>
+                        </div>
+                        <!--Mother Name-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Mother Name">
+                        </div>
+                        <!--Mother Job-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-female"></i></span>
+
+                                <select name="mjob" id="mjob" class="custom-select col-md-10 form-control">
+                                    <option value="1">Motherjob 1</option>
+                                    <option value="2">Motherjob 2</option>
+                                    <option value="3">Motherjob 3</option>
+                                    <option value="4">Motherjob 4</option>
+                                    <option value="5">Motherjob 5</option>
+                                </select>
+                            </div>
+                          <!--  <input type="text" class="col-md-8 form-control" placeholder="Mother Job">--!>
+                        </div>
+                        <!--Phone Number-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Phone Number">
+                        </div>
+
+                    </form>
+                </div>
+                <!--Right Column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Address-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
+                            </div>
+                            <textarea name="" rows="5" class="col-md-8 form-control" placeholder="Address"></textarea>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!--parents tab content End-->
+
+        <!--Education and job tab content Start-->
+        <div id="eduAndJob" class="container tab-pane fade"><br>
+            <div class="row">
+                <!--Left Column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Education-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-graduation-cap"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Education">
+                        </div>
+                        <!--Career-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-vcard-o"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Career">
+                        </div>
+                        <!--Uni/School-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-university"></i></span>
+                                <select name="uni" id="uni" class="custom-select col-md-10 form-control">
+                                    <option value="1">University / School 1</option>
+                                    <option value="2">University / School 2</option>
+                                    <option value="3">University / School 3</option>
+                                    <option value="4">University / School 4</option>
+                                    <option value="5">University / School 5</option>
+                                </select>
+                            </div>
+                           <!-- <input type="text" class="col-md-8 form-control" placeholder="">--!>
+                        </div>
+                        <!--Major/grade-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-graduation-cap"></i></span>
+                            </div>
+                            <select name="major" id="major" class="custom-select col-md-8">
+                                <option value="1">Major/Grade 1</option>
+                                <option value="2">Major/Grade 2</option>
+                                <option value="3">Major/Grade 3</option>
+                                <option value="4">Major/Grade 4</option>
+                                <option value="5">Major/Grade 5</option>
+                            </select>
+                           <!-- <input type="text" class="col-md-8 form-control" placeholder="Major / Grade">--!>
+                        </div>
+                        <!--Edu Year-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-university"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Education Year">
+                        </div>
+                    </form>
+                </div>
+                <!--Right Column-->
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+        <!--Education and job tab content End-->
+
+        <!--Health tab content Start-->
+        <div id="health" class="container tab-pane fade"><br>
+            <div class="row">
+                <!--Left Column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Disease-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-heartbeat"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Disease">
+                        </div>
+                        <!--Avoid Foods-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-ban"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Avoid Foods">
+                        </div>
+                    </form>
+                </div>
+                <!--Right Column-->
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+        <!--Health tab content End-->
+
+        <!--Donation tab content Start-->
+        <div id="donation" class="container tab-pane fade"><br>
+            <div class="row">
+                <!--Left Column-->
+                <div class="col-md-6">
+                    <form action="">
+                        <!--Donated Building-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-bed"></i></span>
+                            </div>
+                            <input type="text" class="col-md-8 form-control" placeholder="Rooms">
+                        </div>
+                    </form>
+                </div>
+                <!--Right Column-->
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+        <!--Donation tab content End-->
+
+
+    </div>
+    <!--Tab panes End-->
+
+    <!--Button Start-->
+    <div class="row mt-4">
+        <div class="col text-center">
+            <button class="btn btn-info col-4">Register</button>
+        </div>
+    </div>
+    <!--Button End-->
+
+</div>
+<script>
+    $(document).ready(function() {
+        $.dobPicker({
+            daySelector: '#dobday', /* Required */
+            monthSelector: '#dobmonth', /* Required */
+            yearSelector: '#dobyear', /* Required */
+            dayDefault: 'Day', /* Optional */
+            monthDefault: 'Month', /* Optional */
+            yearDefault: 'Year', /* Optional */
+            minimumAge: 12, /* Optional */
+            maximumAge: 80 /* Optional */
+        });
+    });
+</script>
+<script src="assets/script/jquery.js"></script>
+<script src="assets/script/bootstrap.min.js"></script>
+<script src="assets/fontawesome-5.8.2/fontawesome-free-5.8.2-web/js/fontawesome.min.js"></script>
+<script src="assets/Minimalist-jQuery-Plugin-For-Birthday-Selector-DOB-Picker/dobpicker.js"></script>
+</body>
+</html>

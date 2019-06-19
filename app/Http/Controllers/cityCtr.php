@@ -14,7 +14,7 @@ class cityCtr extends Controller
     public function index()
     {
          $cityVar=City::all();
-        return view('index',compact('cityVar'));
+        return view('indexCity',compact('cityVar'));
     }
 
     /**

@@ -1,0 +1,9 @@
+#C5A479
+#E8DA9D
+#F4E8D2
+
+#daedf1                \\background color
+#D1E9ED		\\login background color
+#A9D2D6		\\login background color
+#6D959F
+#51737b		\\h1 color
