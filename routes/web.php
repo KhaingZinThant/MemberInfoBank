@@ -175,3 +175,4 @@ Route::get('/table',function(){
 });
 Route::resource('tableCN','tableCtr');
 Route::apiResource('tableCN','tableCtr');
+Route::get('index','cityCtr@index');

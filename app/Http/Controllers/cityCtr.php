@@ -95,7 +95,7 @@ class cityCtr extends Controller
         if(request()->ajax())
         {
             $product = City::findOrFail($id);
-            return response()->json(['data' => $product]);
+            return response()->json([$product]);
         }
     }
 
@@ -108,17 +108,17 @@ class cityCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request ->validate(['cityDesc' => 'required'
+    //     $request ->validate(['cityDesc' => 'required'
                                         
-    ]);
-      $cityVar=City::find($id);
+    // ]);
+    //   $cityVar=City::find($id);
 
-      $cityVar->cityDesc=$request->get('cityDesc');
-      $cityVar->active=$request->get('active');
-      $cityVar->remark=$request->get('remark');
+    //   $cityVar->cityDesc=$request->get('cityDesc');
+    //   $cityVar->active=$request->get('active');
+    //   $cityVar->remark=$request->get('remark');
 
-      $cityVar->save();
-      return redirect('/cityCN')->with('success','Successfully update');
+    //   $cityVar->save();
+    //   return redirect('/cityCN')->with('success','Successfully update');
             
 
 
@@ -132,11 +132,9 @@ class cityCtr extends Controller
      */
     public function destroy($id)
     {
-        //  City::find($id)->delete();
+         City::find($id)->delete();
      
-        // return response()->json(['success'=>'Product deleted successfully.']);
-         $data = City::findOrFail($id);
-        $data->delete();
-
+         return response()->json(['success'=>'Product deleted successfully.']);
+       
     }
 }
