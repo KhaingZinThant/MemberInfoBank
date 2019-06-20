@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+
 use App\Building;
+use Datatables;
 
 class buildingCtr extends Controller
 {
@@ -12,10 +15,35 @@ class buildingCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     public function index(Request $request)
     {
-        $buildingVar=Building::all();
-        return view('indexBuilding',compact('buildingVar'));
+        
+         if ($request->ajax()) {
+            $data = Building::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                         // $btn = '<input type="checkbox" id="'.$row->cityId.'" name="someCheckbox" />';
+                            
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->buildingId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">
+                             <i class="fa fa-pencil"></i></a>';
+                           
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->buildingId.'" data-original-title="Delete" class="delete btn btn-danger btn-sm deleteProduct"><i class="fa fa-trash"></i></a>';
+
+                       
+    
+
+   
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('indexBuilding');
+       
     }
 
     /**
@@ -25,7 +53,8 @@ class buildingCtr extends Controller
      */
     public function create()
     {
-        return view('buildingView');
+        //
+        return view('');
     }
 
     /**
@@ -36,14 +65,12 @@ class buildingCtr extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
-                            'remark'=>'required']);
-         $buildingVar=new Building(['buildingDesc'=>$request->get('buildingDesc'),
-                        'active'=>$request->get('active'),
-                        'remark'=>$request->get('remark')]);
-         $buildingVar->save();
-         return redirect('/buildingCN')->with('success','Successful');
+        
+         Building::updateOrCreate(['buildingDesc' => $request->buildingDesc],
+                ['active' => $request->active, 'remark' => $request->remark]);        
+   
+         return response()->json(['success'=>'Data saved successfully.']);
+
     }
 
     /**
@@ -65,8 +92,8 @@ class buildingCtr extends Controller
      */
     public function edit($id)
     {
-        $buildingVar=Building::find($id);
-        return view('buildingEdit',compact('buildingVar'));
+      $product = Building::find($id);
+        return response()->json($product);
     }
 
     /**
@@ -78,15 +105,24 @@ class buildingCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-         $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
-                            ]);
-          $buildingVar=Building::find($id);  
-          $buildingVar->buildingDesc = $request->get('buildingDesc');
-          $buildingVar->active = $request->get('active');
-          $buildingVar->remark = $request->get('remark');
-        $buildingVar->save();
-        return redirect('/buildingCN')->with('success','Successfully updated!');
+    //     $request ->validate(['personDesc' => 'required'
+                                        
+    // ]);
+    //   $personTypeVar=PersonType::find($id);
+
+    //   $personTypeVar->personDesc=$request->get('personDesc');
+    //   $personTypeVar->active=$request->get('active');
+    //   $personTypeVar->remark=$request->get('remark');
+
+    //   $personTypeVar->save();
+    //   return redirect('/personTypeCN')->with('success','Successfully update');
+
+         Building::update(['buildingDesc' => $request->buildingDesc],
+                ['active' => $request->active, 'remark' => $request->remark]);        
+   
+         return response()->json(['success'=>'Data updated successfully.']);
+
+
     }
 
     /**
@@ -97,8 +133,11 @@ class buildingCtr extends Controller
      */
     public function destroy($id)
     {
-        $buildingVar = Building::find($id);
-        $buildingVar->delete();
-        return redirect('/buildingCN')->with('delete','Successfully deleted');
+         Building::find($id)->delete();
+     
+        return response()->json(['success'=>'Product deleted successfully.']);
+
+        
+
     }
 }
