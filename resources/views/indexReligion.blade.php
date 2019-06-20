@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-	<a href="/" class="btn btn-primary" margin-top="5">New</a>
+	<a href="/religion" class="btn btn-primary" margin-top="5">New</a>
 	<table class="table table-striped">
 		<thead>
 			<tr>

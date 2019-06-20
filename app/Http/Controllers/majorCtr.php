@@ -25,7 +25,7 @@ class majorCtr extends Controller
      */
     public function create()
     {
-        return view('majorCN');
+        return view('majorView');
     }
 
     /**

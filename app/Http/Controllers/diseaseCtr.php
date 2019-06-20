@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Building;
+use App\Disease;
 
-class buildingCtr extends Controller
+class diseaseCtr extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class buildingCtr extends Controller
      */
     public function index()
     {
-        $buildingVar=Building::all();
-        return view('indexBuilding',compact('buildingVar'));
+        $diseaseVar=Disease::all();
+        return view('indexDisease',compact('diseaseVar'));
     }
 
     /**
@@ -25,7 +25,7 @@ class buildingCtr extends Controller
      */
     public function create()
     {
-        return view('buildingView');
+         return view('diseaseView');
     }
 
     /**
@@ -36,14 +36,17 @@ class buildingCtr extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
-                            'remark'=>'required']);
-         $buildingVar=new Building(['buildingDesc'=>$request->get('buildingDesc'),
-                        'active'=>$request->get('active'),
-                        'remark'=>$request->get('remark')]);
-         $buildingVar->save();
-         return redirect('/buildingCN')->with('success','Successful');
+        $request->validate(['diseaseDesc'=>'required'
+                           
+                        ]);
+        $diseaseVar=new Disease([
+        'diseaseDesc'=>$request->get('diseaseDesc'),
+        'active'=>$request->get('active'),
+        'remark'=>$request->get('remark')
+
+        ]);
+        $diseaseVar->save();
+        return redirect('/diseaseCN')->with('success','Successfully');
     }
 
     /**
@@ -65,8 +68,8 @@ class buildingCtr extends Controller
      */
     public function edit($id)
     {
-        $buildingVar=Building::find($id);
-        return view('buildingEdit',compact('buildingVar'));
+         $diseaseVar=Disease::find($id);
+        return view('diseaseView',compact('diseaseVar')); 
     }
 
     /**
@@ -78,15 +81,16 @@ class buildingCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-         $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
-                            ]);
-          $buildingVar=Building::find($id);  
-          $buildingVar->buildingDesc = $request->get('buildingDesc');
-          $buildingVar->active = $request->get('active');
-          $buildingVar->remark = $request->get('remark');
-        $buildingVar->save();
-        return redirect('/buildingCN')->with('success','Successfully updated!');
+        $request->validate(['diseaseDesc'=>'required'               
+        ]);
+        $diseaseVar=Disease::find($id);
+        $diseaseVar->diseaseDesc=$request->get('diseaseDesc');
+        $diseaseVar->active=$request->get('active');
+        $diseaseVar->remark=$request->get('remark');
+
+        $diseaseVar->save();
+
+        return redirect('/diseaseCN')->with('success','Successfully Updated');
     }
 
     /**
@@ -97,8 +101,8 @@ class buildingCtr extends Controller
      */
     public function destroy($id)
     {
-        $buildingVar = Building::find($id);
-        $buildingVar->delete();
-        return redirect('/buildingCN')->with('delete','Successfully deleted');
+        $diseaseVar=Disease::find($id);
+        $diseaseVar->delete();
+        return redirect('/diseaseCN')->with('delete','Successfully Deleted');
     }
 }

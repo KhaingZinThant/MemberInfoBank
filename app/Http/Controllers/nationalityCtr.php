@@ -26,7 +26,7 @@ class nationalityCtr extends Controller
      */
     public function create()
     {
-        return view('nationallityCN');
+        return view('nationallityView');
     }
 
     /**

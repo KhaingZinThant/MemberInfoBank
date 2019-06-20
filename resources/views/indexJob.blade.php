@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>City List Form</title>
+    <title>Job Type List Form</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/app.css'))}}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/bootstrap.min.css'))}}">
@@ -28,10 +28,10 @@
 <body>
     
 <div class="container">
-    <h1><center>City List Data</center></h1><br>
+    <h1><center>Job Type List Data</center></h1><br>
     <div class="pull-right">
-   <a class="btn btn-success" href="{{route('cityCN.create')}}" > Print</a>
-     <a class="btn btn-success" href="javascript:void(0)" id="createNewProduct">Add New City</a>
+   <a class="btn btn-success" href="{{route('jobCN.create')}}" > Print</a>
+     <a class="btn btn-success" href="javascript:void(0)" id="createNewProduct">Add New Job</a>
   </div>
      <div class="input-group mb-3" style="width: 20%">
                             <select name="batch" id="batch" class="custom-select col-md-6 ">
@@ -68,19 +68,19 @@
               <span id="form_result"></span>
 
                 <form id="productForm" name="productForm" class="form-horizontal">
-                   <input type="hidden" name="cityId" id="cityId">
+                   <input type="hidden" name="personId" id="jobId">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="name" name="cityDesc" placeholder="Enter Name" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="name" name="personDesc" placeholder="Enter Name" value="" maxlength="50" required="">
                         </div>
                     </div>
-                    <!--  <div class="form-group">
+                     <div class="form-group">
 
             <label for="active">Active:</label>
 
             <input type="checkbox" name="active"  id="active">
-        </div> -->
+        </div>
      
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Remark</label>
@@ -113,11 +113,11 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('cityCN.index') }}",
+        ajax: "{{ route('jobCN.index') }}",
         columns: [
             { className: "center",defaultContent: '<input type="checkbox">'},
-            {data: 'cityId', name: 'cityId'},
-            {data: 'cityDesc', name: 'cityDesc'},
+            {data: 'jobId', name: 'jobId'},
+            {data: 'jobDesc', name: 'jobDesc'},
             {data: 'remark', name: 'remark'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -127,7 +127,7 @@
       $('#form_result').html('');
 
         $('#saveBtn').val("create-product");
-        $('#cityId').val('');
+        $('#jobId').val('');
        
           $('#active').val('');
         $('#productForm').trigger("reset");
@@ -139,12 +139,12 @@
       var product_id = $(this).data('id');
       $('#form_result').html('');
 
-      $.get("{{ route('cityCN.index') }}" +'/' + product_id +'/edit', function (data) {
+      $.get("{{ route('jobCN.index') }}" +'/' + product_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Product");
           $('#saveBtn').val("edit-user");
           $('#ajaxModel').modal('show');
-          $('#cityId').val(data.cityId);
-          $('#name').val(data.cityDesc);
+          $('#jobId').val(data.jobId);
+          $('#name').val(data.jobDesc);
           $('#active').val(data.active);
           $('#remark').val(data.remark);
       })
@@ -156,7 +156,7 @@
     
         $.ajax({
           data: $('#productForm').serialize(),
-          url: "{{ route('cityCN.store') }}",
+          url: "{{ route('jobCN.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -187,36 +187,26 @@
       });
     });
     
-
-   $('body').on('click', '.deleteProduct', function () {
+    $('body').on('click', '.deleteProduct', function () {
      
         var product_id = $(this).data("id");
-       $('#confirmModal').modal('show');
-       $('#ok_button').text('Delete');
-        $('#ok_button').click(function(){
+        confirm("Are You sure want to delete !");
+      
         $.ajax({
             type: "DELETE",
             url: "{{ route('jobCN.store') }}"+'/'+product_id,
-              beforeSend:function(){
-                  $('#ok_button').text('Deleting...');
-                 },
 
-       success: function (data) {
-      setTimeout(function(){
-     $('#confirmModal').modal('hide');
-     $('.data-table').DataTable().ajax.reload();
-    }, 300);
-
+            success: function (data) {
+                      confirm("Data deleted successfully.");
                 table.draw();
             },
             error: function (data) {
                 console.log('Error:', data);
             }
         });
-      });
     });
-});
-
+     
+  });
 </script>
 </html>
 @endsection

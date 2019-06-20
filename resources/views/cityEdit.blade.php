@@ -14,7 +14,7 @@
 		</div>
 		<div class="form-group">
 			<label>Remark</label>
-			<textarea name="remark" value="{{$cityVar->cityDesc}}" class="form-control"></textarea>
+			<textarea name="remark" value="{{$cityVar->remark}}" class="form-control"></textarea>
 		</div>
 		<div class="form-group">
 		<button name="submit" class="btn btn-info" type="submit">Submit</button>

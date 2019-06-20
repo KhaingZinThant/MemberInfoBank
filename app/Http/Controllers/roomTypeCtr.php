@@ -27,6 +27,8 @@ class roomTypeCtr extends Controller
         return view('roomTypeView');
     }
 
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -69,7 +71,7 @@ class roomTypeCtr extends Controller
     public function edit($id)
     {
         $roomTypeVar=RoomType::find($id);
-        return view('roomTypeEditView',compact('roomTypeVar'));    }
+        return view('roomTypeEdit',compact('roomTypeVar'));    }
 
     /**
      * Update the specified resource in storage.
