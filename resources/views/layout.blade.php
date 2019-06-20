@@ -51,18 +51,18 @@
                     </a>
                     <ul id="generalInfo" class="collapse" data-parent="#sidebar-nav">
                         <li><a href="/personType">Person Type</a></li>
-                        <li><a href="">Register Person Status</a></li>
-                        <li><a href="">City</a></li>
-                        <li><a href="">Job Description Career</a></li>
-                        <li><a href="">Education</a></li>
-                        <li><a href="">Uni / School</a></li>
-                        <li><a href="">Major / Grade</a></li>
-                        <li><a href="">Education Year</a></li>
-                        <li><a href="">Religion</a></li>
-                        <li><a href="">Nationality</a></li>
-                        <li><a href="">Supervisor</a></li>
-                        <li><a href="">Channel</a></li>
-                        <li><a href="">Diseases</a></li>
+                        <li><a href="/personStatus">Register Person Status</a></li>
+                        <li><a href="/city">City</a></li>
+                        <li><a href="/job">Job Description Career</a></li>
+                        <li><a href="/education">Education</a></li>
+                        <li><a href="/school">Uni / School</a></li>
+                        <li><a href="/major">Major / Grade</a></li>
+                        <li><a href="/educationYear">Education Year</a></li>
+                        <li><a href="/religion">Religion</a></li>
+                        <li><a href="/nationality">Nationality</a></li>
+                        <li><a href="/supervisor">Supervisor</a></li>
+                        <li><a href="/channel">Channel</a></li>
+                        <li><a href="/disease">Diseases</a></li>
                         <li><a href="/avoidFood">Avoid Foods</a></li>
                         <li><a href="">Building Donation</a></li>
                     </ul>
