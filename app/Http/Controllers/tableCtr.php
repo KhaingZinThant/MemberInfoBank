@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\PersonType;
+use App\Table;
 use Datatables;
 
-class personTypeCtr extends Controller
+class tableCtr extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +19,14 @@ class personTypeCtr extends Controller
     {
         
          if ($request->ajax()) {
-            $data = PersonType::latest()->get();
+            $data = Table::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                             
-                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->personId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->tableId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
                            
-                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->personId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->tableId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
 
                          
    
@@ -37,7 +37,7 @@ class personTypeCtr extends Controller
                     ->make(true);
         }
       
-        return view('indexPersonType');
+        return view('indexTable');
        
     }
 
@@ -49,7 +49,7 @@ class personTypeCtr extends Controller
     public function create()
     {
         //
-        return view('personTypeView');
+        return view('tableView');
     }
 
     /**
@@ -61,8 +61,8 @@ class personTypeCtr extends Controller
     public function store(Request $request)
     {
        
-         PersonType::updateOrCreate([
-            'personDesc' => $request->personDesc],
+         Table::updateOrCreate([
+            'tableDesc' => $request->tableDesc],
                 ['active' => $request->active, 'remark' => $request->remark]);        
    
          return response()->json(['success'=>'Data saved successfully.']);
@@ -88,7 +88,7 @@ class personTypeCtr extends Controller
      */
     public function edit($id)
     {
-      $product = PersonType::find($id);
+      $product = Table::find($id);
         return response()->json($product);
     }
 
@@ -101,17 +101,17 @@ class personTypeCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request ->validate(['personDesc' => 'required'
+        $request ->validate(['tableDesc' => 'required'
                                         
     ]);
-      $personTypeVar=PersonType::find($id);
+      $tableVar=Table::find($id);
 
-      $personTypeVar->personDesc=$request->get('personDesc');
-      $personTypeVar->active=$request->get('active');
-      $personTypeVar->remark=$request->get('remark');
+      $tableVar->tableDesc=$request->get('tableDesc');
+      $tableVar->active=$request->get('active');
+      $tableVar->remark=$request->get('remark');
 
-      $personTypeVar->save();
-      return redirect('/personTypeCN')->with('success','Successfully update');
+      $tableVar->save();
+      return redirect('/tableCN')->with('success','Successfully update');
 
     }
 
@@ -123,7 +123,7 @@ class personTypeCtr extends Controller
      */
     public function destroy($id)
     {
-         PersonType::find($id)->delete();
+         Table::find($id)->delete();
      
         return response()->json(['success'=>'Product deleted successfully.']);
 

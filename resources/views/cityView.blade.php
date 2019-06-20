@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="{{route('cityCN.store')}}" method="Post" style="padding-top: 50px;color: black">
-	<div class="jumbotron jumbotron-fluid text-center">
+	<div class="jumbotron jumbotron-fluid text-center" id="loginBody">
 	<h1>Member Info Bank</h1>
 	</div>
 	<div class="bg-light">
@@ -20,19 +20,19 @@
 		<div class="form-group row">
 			<label for="cityDesc" class="col-sm-2 col-form-label">City Description:</label>
 			<div class="col-sm-5">
-			<input type="text" name="cityDesc" class="form-control" placeholder="Enter city name">
+			<input type="text" name="cityDesc" class="form-control" placeholder="Enter city name" id="cityDesc">
 		</div>
 		</div>
 		<div class="form-group row">
 			<label for="active" class="col-sm-2 col-form-label"> Active</label>
 			<div class="col-sm-5">
-			<input type="checkbox" name="active" class="form-check-input" value="1"> 
+			<input type="checkbox" name="active" class="form-check-input" value="1" id="active"> 
 		</div>
 		</div>
 		<div class="form-group row">
 			<label for="remark" class="col-sm-2 col-form-label">Remark:</label>
 			<div class="col-sm-5">
-			<textarea name="remark" class="form-control"></textarea>
+			<textarea name="remark" class="form-control" id="cityDesc"></textarea>
 		</div>
 		</div>
 		<div class="form-group">

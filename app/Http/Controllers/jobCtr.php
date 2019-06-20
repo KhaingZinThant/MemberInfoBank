@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-
-use App\PersonType;
+use App\Job;
 use Datatables;
 
-class personTypeCtr extends Controller
+class jobCtr extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        
-         if ($request->ajax()) {
-            $data = PersonType::latest()->get();
+        if ($request->ajax()) {
+            $data = Job::latest()->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                             
-                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->personId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->jobId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
                            
-                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->personId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->jobId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
 
                          
    
@@ -35,10 +32,9 @@ class personTypeCtr extends Controller
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-        }
-      
-        return view('indexPersonType');
-       
+                }
+                return view('indexJob');
+        
     }
 
     /**
@@ -48,8 +44,7 @@ class personTypeCtr extends Controller
      */
     public function create()
     {
-        //
-        return view('personTypeView');
+        return view('jobView');
     }
 
     /**
@@ -60,13 +55,10 @@ class personTypeCtr extends Controller
      */
     public function store(Request $request)
     {
-       
-         PersonType::updateOrCreate([
-            'personDesc' => $request->personDesc],
+       Job::updateOrCreate(['jobDesc' => $request->jobDesc],
                 ['active' => $request->active, 'remark' => $request->remark]);        
    
          return response()->json(['success'=>'Data saved successfully.']);
-
     }
 
     /**
@@ -88,8 +80,8 @@ class personTypeCtr extends Controller
      */
     public function edit($id)
     {
-      $product = PersonType::find($id);
-        return response()->json($product);
+        $jobVar = Job::find($id);
+        return response()->json($jobVar);
     }
 
     /**
@@ -101,18 +93,15 @@ class personTypeCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request ->validate(['personDesc' => 'required'
-                                        
-    ]);
-      $personTypeVar=PersonType::find($id);
+        $request->validate(['jobName'=>'required']);
 
-      $personTypeVar->personDesc=$request->get('personDesc');
-      $personTypeVar->active=$request->get('active');
-      $personTypeVar->remark=$request->get('remark');
+        $jobVar=Major::find($id);
+        $jobVar->jobName = $request->get('jobName');
+        $jobVar->active = $request->get('active');
+        $jobVar->remark = $request->get('remark');
 
-      $personTypeVar->save();
-      return redirect('/personTypeCN')->with('success','Successfully update');
-
+        $jobVar->save();
+        return redirect('jobCN')->with('success','Successfully Updated!');
     }
 
     /**
@@ -123,9 +112,8 @@ class personTypeCtr extends Controller
      */
     public function destroy($id)
     {
-         PersonType::find($id)->delete();
-     
-        return response()->json(['success'=>'Product deleted successfully.']);
-
+        $jobVar = Job::find($id);
+        $jobVar->delete();
+        return redirect('jobCN')->with('delete','Successfully Deleted!');
     }
 }

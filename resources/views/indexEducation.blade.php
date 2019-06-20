@@ -26,7 +26,7 @@
 
         
             <div class="navbar-nav ml-auto">
-                 <a href="/" class="btn btn-success mt-5 mb-2" >Add New</a>
+                 <a href="/education" class="btn btn-success mt-5 mb-2" >Add New</a>
             </div>
         </div>
     </nav>

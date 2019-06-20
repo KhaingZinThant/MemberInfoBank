@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<a href="/" class="btn btn-success mt-5 mb-2">Insert</a>
+<a href="/major" class="btn btn-success mt-5 mb-2">Insert</a>
 <div class="uper">
 	@if (session()->get('success'))
 	<div class="alert alert-success alert-dismissible">
@@ -20,7 +20,7 @@
 <table class="table table-striped table-borderless table-hover bg-light">
 	<thead class="font-weight-bold">
 		<tr>
-			<td>Nationality Name</td>
+			<td>Major Name</td>
 			<td>Active</td>
 			<td>Remark</td>
 			<td colspan="2">actions</td>

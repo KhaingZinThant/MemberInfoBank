@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+
 use App\City;
+use Datatables;
+
 class cityCtr extends Controller
 {
     /**
@@ -11,10 +15,30 @@ class cityCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-         $cityVar=City::all();
-        return view('indexCity',compact('cityVar'));
+        
+         if ($request->ajax()) {
+            $data = City::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->cityId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                           
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->cityId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                         
+   
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('indexCity');
+       
     }
 
     /**
@@ -24,7 +48,8 @@ class cityCtr extends Controller
      */
     public function create()
     {
-         return view('cityView');
+        
+        return view('cityView');
     }
 
     /**
@@ -35,14 +60,12 @@ class cityCtr extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate(['cityDesc'=>'required',
-                            'active'=>'required',
-                            'remark'=>'required']);
-         $cityVar=new City(['cityDesc'=>$request->get('cityDesc'),
-                        'active'=>$request->get('active'),
-                        'remark'=>$request->get('remark')]);
-         $cityVar->save();
-         return redirect('/cityCN')->with('success','Successful');
+        
+         City::updateOrCreate(['cityDesc' => $request->cityDesc],
+                ['active' => $request->active, 'remark' => $request->remark]);        
+   
+         return response()->json(['success'=>'Data saved successfully.']);
+
     }
 
     /**
@@ -62,10 +85,18 @@ class cityCtr extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    // public function edit($id)
+    // {
+    //   $product = City::find($id);
+    //     return response()->json($product);
+    // }
+     public function edit($id)
     {
-        $cityVar=City::find($id);
-        return view('cityEdit',compact('cityVar'));
+        if(request()->ajax())
+        {
+            $product = City::findOrFail($id);
+            return response()->json(['data' => $product]);
+        }
     }
 
     /**
@@ -77,15 +108,20 @@ class cityCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-          $request->validate(['cityDesc'=>'required',
-                            'active'=>'required',
-                            ]);
-          $cityVar=City::find($id);     // City (model), $city ka edit bat ka har nae to
-          $cityVar->cityDesc = $request->get('cityDesc');
-          $cityVar->active = $request->get('active');
-          $cityVar->remark = $request->get('remark');
-        $City->save();
-        return redirect('/cityCN')->with('success','Successfully updated!');
+        $request ->validate(['cityDesc' => 'required'
+                                        
+    ]);
+      $cityVar=City::find($id);
+
+      $cityVar->cityDesc=$request->get('cityDesc');
+      $cityVar->active=$request->get('active');
+      $cityVar->remark=$request->get('remark');
+
+      $cityVar->save();
+      return redirect('/cityCN')->with('success','Successfully update');
+            
+
+
     }
 
     /**
@@ -95,9 +131,12 @@ class cityCtr extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-        $cityVar = City::find($id);
-        $cityVar->delete();
-        return redirect('/cityCN')->with('success','Successfully deleted');
+    {
+        //  City::find($id)->delete();
+     
+        // return response()->json(['success'=>'Product deleted successfully.']);
+         $data = City::findOrFail($id);
+        $data->delete();
+
     }
 }

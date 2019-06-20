@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<form action="{{route('roomCN.update',$roomVar->roomId)}}" method="Post">
+<form action="{{route('roomCN.update',$Room->roomId)}}" method="Post">
 	@method('PATCH')
 	@csrf
 	<div class="bg-light mt-5 mb-5">
@@ -21,12 +21,12 @@
 			<tr>
 			<td><label>Remark</label></td>
 			<td><textarea name="remark" value="{{$roomVar->remark}}" class="form-control"></textarea></td>
-			</tr>
+		</tr>
 		</div>
 		<div class="form-group">
 			<tr>
-				<td><button name="submit" class="btn btn-info" type="submit">Submit</button></td>
-			</tr>
+		<td><button name="submit" class="btn btn-info" type="submit">Submit</button></td>
+	</tr>
 		</div>
 	</form>
 </body>

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<a href="/" class="btn btn-success mt-5 mb-2">Add New</a>
+<a href="/career" class="btn btn-success mt-5 mb-2">Add New</a>
 <div class="uper">
 	 @if (session()->get('success'))
 	 <div class="alert alert-success alert-dismissible">

@@ -3,37 +3,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>City List Form</title>
+    <title>Table List Form</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/app.css'))}}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/bootstrap.min.css'))}}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/dataTables.bootstrap.min.css'))}}">
     <link rel="stylesheet" type="text/css" href="{{(asset('css/jquery.dataTables.min.css'))}}">
-        <link rel="stylesheet" type="text/css" href="{{(asset('css/dataTables.bootstrap4.min.css'))}}">
-        <link rel="stylesheet" type="text/css" href="{{(asset('css/font-awesome-4.7.0/css/font-awesome.min.css'))}}">
-        <link rel="stylesheet" type="text/css" href="{{(asset('css/fontawesome-5.8.2/fontawesome-free-5.8.2-web/css/fontawesome.min.css'))}}">
-    
-       
-       
-     <script type="text/javascript" src="{{(asset('js/app.js'))}}"></script>
-      <script type="text/javascript" src="{{(asset('js/jquery.js'))}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{(asset('css/dataTables.bootstrap4.min.css'))}}">
+    <link rel="stylesheet" type="text/css" href="{{(asset('css/font-awesome-4.7.0/css/font-awesome.min.css'))}}">
+    <link rel="stylesheet" type="text/css" href="{{(asset('css/fontawesome-5.8.2/fontawesome-free-5.8.2-web/css/fontawesome.min.css'))}}">
+    <link rel="stylesheet" href="css/dataTables.checkboxes.css">
+    <script type="text/javascript" src="{{(asset('js/app.js'))}}"></script>
+    <script type="text/javascript" src="{{(asset('js/jquery.js'))}}"></script>
     <script type="text/javascript" src="{{(asset('js/jquery.min.js'))}}"></script>
     <script type="text/javascript" src="{{(asset('js/jquery.dataTables.min.js'))}}"></script>
     <script type="text/javascript" src="{{(asset('js/dataTables.bootstrap.min.js'))}}"></script>
     <script type="text/javascript" src="{{(asset('js/dataTables.bootstrap4.min.js'))}}"></script>
-     <script type="text/javascript" src="{{(asset('js/bootstrap.min.js'))}}"></script>
-        <script type="text/javascript" src="{{(asset('js/jquery.datatables.min.js'))}}"></script>
-        <script type="text/javascript" src="{{(asset('js/jquery.validate.js'))}}"></script>
+    <script type="text/javascript" src="{{(asset('js/bootstrap.min.js'))}}"></script>
+    <script type="text/javascript" src="{{(asset('js/jquery.datatables.min.js'))}}"></script>
+    <script type="text/javascript" src="{{(asset('js/jquery.validate.js'))}}"></script>
+    <script src="js/dataTables.checkboxes.min.js"></script>
 </head>
 <body>
     
 <div class="container">
-    <h1><center>City List Data</center></h1><br>
+  <h1><center>Room List Data</center></h1><br>
     <div class="pull-right">
-   <a class="btn btn-success" href="{{route('cityCN.create')}}" > Print</a>
-     <a class="btn btn-success" href="javascript:void(0)" id="createNewProduct">Add New City</a>
-  </div>
-     <div class="input-group mb-3" style="width: 20%">
+    <a class="btn btn-success" href="{{route('tableCN.create')}}" > Print </a>
+    <a class="btn btn-success" href="javascript:void(0)" id="createNewProduct"> Create New Room</a>
+    </div>
+    <div class="input-group mb-3 responsive" style="width: 30%">
                             <select name="batch" id="batch" class="custom-select col-md-6 ">
                                 <option value="1">Batch 1</option>
                                 <option value="2">Batch 2</option>
@@ -42,22 +41,25 @@
                                 <option value="5">Batch 5</option>
                             </select>
                             <button class="btn btn-light col-md-1 ml-1"><i class="fa fa-plus"></i></button>
-                        </div>
-    <table class="table table-bordered  table-stripped table-hover data-table">
+    </div>
+    <div class="table-responsive">
+      <form id="frm-example" method="POST">
+      <table class="table table-bordered  table-stripped table-hover data-table" width="99.5%">
         <thead style="background-color: #e6e6e6">
-            <tr>
-               <th><input  id="example" type="checkbox"  ></th>
+          <tr>
+               <th></th>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Remark</th>
                 <th width="280px">Action</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
         </tbody>
-    </table>
-</div>
-   
+      </table>
+      </form>
+    </div>
+  
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -68,19 +70,19 @@
               <span id="form_result"></span>
 
                 <form id="productForm" name="productForm" class="form-horizontal">
-                   <input type="hidden" name="cityId" id="cityId">
+                   <input type="hidden" name="tableId" id="tableId">
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="name" name="cityDesc" placeholder="Enter Name" value="" maxlength="50" required="">
+                            <input type="text" class="form-control" id="name" name="tableDesc" placeholder="Enter Name" value="" maxlength="50" required="">
                         </div>
                     </div>
-                    <!--  <div class="form-group">
+                     <div class="form-group">
 
             <label for="active">Active:</label>
 
             <input type="checkbox" name="active"  id="active">
-        </div> -->
+        </div>
      
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Remark</label>
@@ -98,7 +100,23 @@
         </div>
     </div>
 </div>
-    
+<div id="confirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Confirmation</h2>
+            </div>
+            <div class="modal-body">
+                <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+            </div>
+            <div class="modal-footer">
+             <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>   
 </body>
     
 <script type="text/javascript">
@@ -113,11 +131,11 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('cityCN.index') }}",
+        ajax: "{{ route('tableCN.index') }}",
         columns: [
             { className: "center",defaultContent: '<input type="checkbox">'},
-            {data: 'cityId', name: 'cityId'},
-            {data: 'cityDesc', name: 'cityDesc'},
+            {data: 'tableId', name: 'tableId'},
+            {data: 'tableDesc', name: 'tableDesc'},
             {data: 'remark', name: 'remark'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
@@ -127,7 +145,7 @@
       $('#form_result').html('');
 
         $('#saveBtn').val("create-product");
-        $('#cityId').val('');
+        $('#tableId').val('');
        
           $('#active').val('');
         $('#productForm').trigger("reset");
@@ -139,12 +157,12 @@
       var product_id = $(this).data('id');
       $('#form_result').html('');
 
-      $.get("{{ route('cityCN.index') }}" +'/' + product_id +'/edit', function (data) {
+      $.get("{{ route('tableCN.index') }}" +'/' + product_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Product");
           $('#saveBtn').val("edit-user");
           $('#ajaxModel').modal('show');
-          $('#cityId').val(data.cityId);
-          $('#name').val(data.cityDesc);
+          $('#tableId').val(data.tableId);
+          $('#name').val(data.tableDesc);
           $('#active').val(data.active);
           $('#remark').val(data.remark);
       })
@@ -156,19 +174,13 @@
     
         $.ajax({
           data: $('#productForm').serialize(),
-          url: "{{ route('cityCN.store') }}",
+          url: "{{ route('tableCN.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
-
-
               html = '<div class="alert alert-success">' + data.success + '</div>';
-
-               
              $('#productForm').trigger("reset");
-            
                $('#form_result').html(html);
-
                 setTimeout(function(){
     $('#ajaxModel').modal('hide');
      $('.data-table').DataTable().ajax.reload();
@@ -187,7 +199,6 @@
       });
     });
     
-
    $('body').on('click', '.deleteProduct', function () {
      
         var product_id = $(this).data("id");
@@ -196,7 +207,7 @@
         $('#ok_button').click(function(){
         $.ajax({
             type: "DELETE",
-            url: "{{ route('jobCN.store') }}"+'/'+product_id,
+            url: "{{ route('tableCN.store') }}"+'/'+product_id,
               beforeSend:function(){
                   $('#ok_button').text('Deleting...');
                  },
@@ -216,6 +227,9 @@
       });
     });
 });
+
+
+
 
 </script>
 </html>

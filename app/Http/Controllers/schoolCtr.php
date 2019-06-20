@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Building;
+use App\School;
 
-class buildingCtr extends Controller
+class schoolCtr extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class buildingCtr extends Controller
      */
     public function index()
     {
-        $buildingVar=Building::all();
-        return view('indexBuilding',compact('buildingVar'));
+        $schoolVar=School::all();
+        return view('indexSchool',compact('schoolVar'));
     }
 
     /**
@@ -25,7 +25,7 @@ class buildingCtr extends Controller
      */
     public function create()
     {
-        return view('buildingView');
+        return view('schoolView');
     }
 
     /**
@@ -36,14 +36,16 @@ class buildingCtr extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
-                            'remark'=>'required']);
-         $buildingVar=new Building(['buildingDesc'=>$request->get('buildingDesc'),
-                        'active'=>$request->get('active'),
-                        'remark'=>$request->get('remark')]);
-         $buildingVar->save();
-         return redirect('/buildingCN')->with('success','Successful');
+        $request->validate(['schoolDesc'=>'required'
+                            ]);
+      $channelVar=new Channel(['schoolDesc'=>$request->get('schoolDesc'),
+                                'active'=>$request->get('active'),
+                                'remark'=>$request->get('remark')
+               
+
+      ]);
+      $schoolVar->save();
+      return redirect('/schoolCN')->with('success','Successfully');
     }
 
     /**
@@ -65,8 +67,8 @@ class buildingCtr extends Controller
      */
     public function edit($id)
     {
-        $buildingVar=Building::find($id);
-        return view('buildingEdit',compact('buildingVar'));
+        $schoolVar=School::find($id);
+        return view('schoolEdit',compact('schoolVar')); 
     }
 
     /**
@@ -78,15 +80,14 @@ class buildingCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-         $request->validate(['buildingDesc'=>'required',
-                            'active'=>'required',
+        $request->validate(['roomDesc'=>'required'
                             ]);
-          $buildingVar=Building::find($id);  
-          $buildingVar->buildingDesc = $request->get('buildingDesc');
-          $buildingVar->active = $request->get('active');
-          $buildingVar->remark = $request->get('remark');
-        $buildingVar->save();
-        return redirect('/buildingCN')->with('success','Successfully updated!');
+          $schoolVar=Room::find($id);    
+          $schoolVar->schoolDesc = $request->get('schoolDesc');
+          $schoolVar->active = $request->get('active');
+          $schoolVar->remark = $request->get('remark');
+          $schoolVar->save();
+        return redirect('/schoolCN')->with('success','Successfully updated!');
     }
 
     /**
@@ -97,8 +98,8 @@ class buildingCtr extends Controller
      */
     public function destroy($id)
     {
-        $buildingVar = Building::find($id);
-        $buildingVar->delete();
-        return redirect('/buildingCN')->with('delete','Successfully deleted');
+         $schoolVar = School::find($id);
+           $schoolVar->delete();
+           return redirect('/schoolCN')->with('success','Successfully deleted');
     }
 }

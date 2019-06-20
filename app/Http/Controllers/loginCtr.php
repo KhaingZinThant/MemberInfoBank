@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Login;
+
 class loginCtr extends Controller
 {
     /**
@@ -22,14 +23,11 @@ class loginCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function showLogin() 
-    {
-        return view('login');
-    }
     public function create()
     {
         return view('register');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,16 +37,13 @@ class loginCtr extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate(['userName'=>'required',
-                             'password'=>'required']);
-
-        $loginVar=new Login([
-        'userName'=>$request->get('userName'),
-        'password'=>$request->get('password')
-        ]);
-
-        $loginVar->save();
-        return redirect('/loginCN')->with('success','Successfully Inserted!');
+        $request->validate(['userName'=>'required',
+                            'password'=>'required',
+                           ]);
+         $loginVar=new Login(['userName'=>$request->get('userName'),
+                        'password'=>$request->get('password')]);
+         $loginVar->save();
+         return redirect('/loginCN')->with('success','Successful');
     }
 
     /**
@@ -70,7 +65,8 @@ class loginCtr extends Controller
      */
     public function edit($id)
     {
-        //
+        $loginVar=Login::find($id);
+        return view('loginEdit',compact('loginVar')); 
     }
 
     /**

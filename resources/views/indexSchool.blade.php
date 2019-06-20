@@ -3,22 +3,22 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <td>Channel Name</td>
+            <td>Uni/School Name</td>
             <td>Active</td>
             <td>Remark</td>
             <td colspan="2">Actions</td>
-        <td><a href="/channel" class="btn btn-info">Insert</a></td>
+        <td><a href="/" class="btn btn-info">Insert</a></td>
         </tr>
     </thead>
     <tbody>
-        @foreach($channelVar as $channel)
+        @foreach($schoolVar as $school)
         <tr>
-        <td>{{$channel->channelDesc}}</td>
-        <td>{{$channel->active}}</td>
-        <td>{{$channel->remark}}</td>
-        <td><a href="{{route('channelCN.edit',$channel->channelId)}}" class="btn btn-info">Edit</a></td>
+        <td>{{$school->schoolDesc}}</td>
+        <td>{{$school->active}}</td>
+        <td>{{$school->remark}}</td>
+        <td><a href="{{route('schoolCN.edit',$school->schoolId)}}" class="btn btn-info">Edit</a></td>
         <td>
-        <form action="{{route('channelCN.destroy',$channel->channelId)}}" method="Post">
+        <form action="{{route('schoolCN.destroy',$school->channelId)}}" method="Post">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger">Delete</button>

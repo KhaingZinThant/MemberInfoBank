@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+
 use App\PersonStatus;
+use Datatables;
 
 class personStatusCtr extends Controller
 {
@@ -12,10 +15,30 @@ class personStatusCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-         $personStatusVar=PersonStatus::all();
-        return view ('indexPersonStatus',compact("personStatusVar"));
+        
+         if ($request->ajax()) {
+            $data = PersonStatus::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->statusId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                           
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->statusId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                         
+   
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('indexPersonStatus');
+       
     }
 
     /**
@@ -25,7 +48,8 @@ class personStatusCtr extends Controller
      */
     public function create()
     {
-       return view('personStatusView');
+        
+        return view('personStatusView');
     }
 
     /**
@@ -34,18 +58,14 @@ class personStatusCtr extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
-    $request ->validate(['statusDesc' => 'required'
-                                          
-    ]);
-        $personStatusVar=new PersonStatus([
-            'statusDesc'=> $request->get('statusDesc'),
-            'active' =>$request ->get('active'),
-            'remark'=>$request->get('remark')
-            ]);
-            $personStatusVar->save();
-        return redirect('/personStatusCN') -> with('success','Successfully Inserted!');
+        
+         PersonStatus::updateOrCreate(['statusDesc' => $request->statusDesc],
+                ['active' => $request->active, 'remark' => $request->remark]);        
+   
+         return response()->json(['success'=>'Data saved successfully.']);
+
     }
 
     /**
@@ -67,8 +87,8 @@ class personStatusCtr extends Controller
      */
     public function edit($id)
     {
-         $personStatusVar=PersonStatus::find($id);
-        return view ('personStatusEdit',compact("personStatusVar"));
+      $product = PersonStatus::find($id);
+        return response()->json($product);
     }
 
     /**
@@ -90,7 +110,8 @@ class personStatusCtr extends Controller
       $personStatusVar->remark=$request->get('remark');
 
       $personStatusVar->save();
-      return redirect('/personStatusCN')->with('success','Successfully updated!');
+      return redirect('/personStatusCN')->with('success','Successfully update');
+
     }
 
     /**
@@ -101,8 +122,9 @@ class personStatusCtr extends Controller
      */
     public function destroy($id)
     {
-        $personStatusVar=PersonStatus::find($id);
-         $personStatusVar->delete();
-         return redirect('/personStatusCN')->with('delete','Successfully deleted!');
+         PersonStatus::find($id)->delete();
+     
+        return response()->json(['success'=>'Product deleted successfully.']);
+
     }
 }

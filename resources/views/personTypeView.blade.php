@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
 <form action="{{route('personTypeCN.store')}}" method="post" style="padding-top: 50px;color:black">
+	
 	@csrf
 	<h1 style="font-family:Bahnschrift Light"><b>Member Info Bank</b></h1><br>
 
@@ -25,11 +26,7 @@
 		
 	</table><br>
 	 </div>
-	<button type="submit" class="btn btn-info">submit </button>
-		<!--<a href="{{route('personTypeCN.index')}}" class="btn btn-primary">Update</a>
-		<a href="{{route('personTypeCN.index')}}" class="btn btn-primary">Delete</a>
-  
--->
+	<button type="submit" class="btn btn-info">submit</button>
 	</form>
 
 
