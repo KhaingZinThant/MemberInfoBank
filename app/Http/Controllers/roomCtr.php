@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+
 use App\Room;
-use DataTables;
+use Datatables;
+
 class roomCtr extends Controller
 {
     /**
@@ -12,11 +15,30 @@ class roomCtr extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Datatables::of(User::query())->make(true);
-        $roomVar=Room::all();        
-       return view('indexRoom',compact('roomVar'));
+        
+         if ($request->ajax()) {
+            $data = Room::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                            
+                             $btn =  '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->roomId.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                           
+                           $btn =$btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->roomId.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                         
+   
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('indexRoom');
+       
     }
 
     /**
@@ -26,7 +48,8 @@ class roomCtr extends Controller
      */
     public function create()
     {
-         return view('roomView');
+        //
+        return view('roomView');
     }
 
     /**
@@ -37,14 +60,13 @@ class roomCtr extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate(['roomDesc'=>'required',
-                            'active'=>'required',
-                            'remark'=>'required']);
-         $roomVar=new Room(['roomDesc'=>$request->get('roomDesc'),
-                        'active'=>$request->get('active'),
-                        'remark'=>$request->get('remark')]);
-         $roomVar->save();
-         return redirect('/roomCN')->with('success','Successful');
+       
+         Room::updateOrCreate([
+            'roomDesc' => $request->roomDesc],
+                ['active' => $request->active, 'remark' => $request->remark]);        
+   
+         return response()->json(['success'=>'Data saved successfully.']);
+
     }
 
     /**
@@ -66,8 +88,8 @@ class roomCtr extends Controller
      */
     public function edit($id)
     {
-        $roomVar=Room::find($id);
-        return view('roomEdit',compact('roomVar'));
+      $product = Room::find($id);
+        return response()->json($product);
     }
 
     /**
@@ -79,14 +101,18 @@ class roomCtr extends Controller
      */
     public function update(Request $request, $id)
     {
-         $request->validate(['roomDesc'=>'required'
-                            ]);
-          $roomVar=Room::find($id);    
-          $roomVar->roomDesc = $request->get('roomDesc');
-          $roomVar->active = $request->get('active');
-          $roomVar->remark = $request->get('remark');
-          $roomVar->save();
-        return redirect('/roomCN')->with('success','Successfully updated!');
+        $request ->validate(['roomDesc' => 'required'
+                                        
+    ]);
+      $roomVar=Room::find($id);
+
+      $roomVar->roomDesc=$request->get('roomDesc');
+      $roomVar->active=$request->get('active');
+      $roomVar->remark=$request->get('remark');
+
+      $roomVar->save();
+      return redirect('/roomCN')->with('success','Successfully update');
+
     }
 
     /**
@@ -97,8 +123,9 @@ class roomCtr extends Controller
      */
     public function destroy($id)
     {
-         $roomVar = Room::find($id);
-        $roomVar->delete();
-        return redirect('/roomCN')->with('success','Successfully deleted');
+         Room::find($id)->delete();
+     
+        return response()->json(['success'=>'Product deleted successfully.']);
+
     }
 }
